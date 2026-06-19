@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>El Semáforo de la Alimentación Saludable</title>
+  <!-- Google Fonts for playful text -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap" rel="stylesheet">
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Background Music/Sound Control (optional but nice) -->
+  <div class="audio-control" id="audio-control" style="display: none;">
+    <button id="btn-sound-toggle" class="btn-round" title="Activar/Desactivar Sonido">🔊</button>
+  </div>
+
+  <!-- CONTAINER -->
+  <main class="game-container">
+    
+    <!-- PANTALLA DE INICIO -->
+    <section id="screen-welcome" class="screen active">
+      <div class="welcome-card">
+        <h1 class="game-title">🚦 El Semáforo de la<br><span class="highlight">Alimentación Saludable</span> 🍎</h1>
+        <p class="subtitle">¡Aprende a alimentar a tu cuerpo para crecer sano y fuerte jugando!</p>
+        
+        <div class="welcome-character">
+          <div class="character-light red pulse">🔴</div>
+          <div class="character-light yellow pulse">🟡</div>
+          <div class="character-light green pulse">🟢</div>
+        </div>
+
+        <button id="btn-start" class="btn-primary">¡Empezar a Jugar! 🎮</button>
+      </div>
+    </section>
+
+    <!-- PANTALLA DE JUEGO -->
+    <section id="screen-game" class="screen">
+      <!-- Encabezado de Juego (Puntaje y Progreso) -->
+      <header class="game-header">
+        <div class="stats-panel">
+          <div class="stat-item correct">
+            <span class="stat-icon">⭐</span>
+            <span class="stat-label">Bien:</span>
+            <span id="score-correct" class="stat-value">0</span>
+          </div>
+          <div class="stat-item incorrect">
+            <span class="stat-icon">☁️</span>
+            <span class="stat-label">Intentos:</span>
+            <span id="score-incorrect" class="stat-value">0</span>
+          </div>
+        </div>
+
+        <div class="progress-container">
+          <div class="progress-bar" id="progress-bar" style="width: 0%;"></div>
+        </div>
+      </header>
+
+      <!-- Instrucciones de voz / Texto -->
+      <div class="instruction-box">
+        <p id="instruction-text">¡Coloca el alimento en el color correcto del semáforo!</p>
+        <button id="btn-speak-instruction" class="btn-voice-repeat" title="Escuchar de nuevo">🔊 Escuchar</button>
+      </div>
+
+      <!-- Zona del Juego Activo -->
+      <div class="game-area">
+        <!-- Tarjeta de Alimento actual -->
+        <div class="food-container">
+          <div class="food-card" id="food-card" draggable="true">
+            <div class="food-emoji" id="food-emoji">🍎</div>
+            <div class="food-name" id="food-name">Manzana</div>
+          </div>
+        </div>
+
+        <!-- Semáforo Interactivo -->
+        <div class="traffic-light-container">
+          <div class="traffic-light">
+            <!-- Luz Roja -->
+            <div class="light-section red-section" data-zone="red" id="zone-red">
+              <div class="light-bulb red"></div>
+              <div class="light-info">
+                <span class="light-emoji">🛑</span>
+                <span class="light-text">ROJO<br><small>Comida Chatarra<br>(Muy poco)</small></span>
+              </div>
+            </div>
+
+            <!-- Luz Amarilla -->
+            <div class="light-section yellow-section" data-zone="yellow" id="zone-yellow">
+              <div class="light-bulb yellow"></div>
+              <div class="light-info">
+                <span class="light-emoji">⚠️</span>
+                <span class="light-text">AMARILLO<br><small>Moderado<br>(A veces)</small></span>
+              </div>
+            </div>
+
+            <!-- Luz Verde -->
+            <div class="light-section green-section" data-zone="green" id="zone-green">
+              <div class="light-bulb green"></div>
+              <div class="light-info">
+                <span class="light-emoji">✅</span>
+                <span class="light-text">VERDE<br><small>Saludable<br>(Todos los días)</small></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Indicadores de ayuda visual o clic -->
+      <div class="help-tips">
+        <p>👆 Puedes <strong>arrastrar</strong> el alimento al semáforo o <strong>tocar</strong> el alimento y luego <strong>tocar</strong> la luz correcta.</p>
+      </div>
+    </section>
+
+    <!-- PANTALLA FINAL -->
+    <section id="screen-end" class="screen">
+      <div class="end-card">
+        <div class="trophy-container">🏆</div>
+        <h2 class="end-title">¡Lo lograste! 🎉</h2>
+        <p class="end-subtitle">Has terminado de clasificar todos los alimentos.</p>
+
+        <!-- Resultados -->
+        <div class="results-board">
+          <div class="result-box correct">
+            <span class="result-icon">⭐</span>
+            <div class="result-number" id="final-correct">0</div>
+            <div class="result-label">Aciertos</div>
+          </div>
+          <div class="result-box incorrect">
+            <span class="result-icon">☁️</span>
+            <div class="result-number" id="final-incorrect">0</div>
+            <div class="result-label">Intentos extra</div>
+          </div>
+        </div>
+
+        <p class="final-evaluation" id="final-evaluation-text">¡Eres un experto de la alimentación saludable!</p>
+
+        <button id="btn-restart" class="btn-primary">¡Jugar otra vez! 🔄</button>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Overlay para efectos visuales rápidos de Acierto / Error -->
+  <div class="feedback-overlay" id="feedback-overlay">
+    <div class="feedback-content" id="feedback-content">
+      <span class="feedback-emoji" id="feedback-emoji">✨</span>
+      <p class="feedback-text" id="feedback-text">¡Muy bien!</p>
+    </div>
+  </div>
+
+  <!-- JS -->
+  <script src="app.js"></script>
+</body>
+</html>
