@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>El Memorama de mis Derechos</title>
+  <!-- Google Fonts for playful text -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap" rel="stylesheet">
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Background Sound Control -->
+  <div class="audio-control">
+    <button id="btn-sound-toggle" class="btn-round" title="Activar/Desactivar Sonido">🔊</button>
+  </div>
+
+  <!-- CONTAINER -->
+  <main class="game-container">
+    
+    <!-- PANTALLA DE INICIO -->
+    <section id="screen-welcome" class="screen active">
+      <div class="welcome-card">
+        <h1 class="game-title">🃏 El Memorama de<br><span class="highlight">Mis Derechos</span> 🌟</h1>
+        <p class="subtitle">¡Encuentra las parejas de cartas y descubre tus derechos para crecer feliz y protegido!</p>
+        
+        <!-- Ilustración generada -->
+        <div class="welcome-illustration-container">
+          <img src="welcome_rights.png" alt="Niños y sus derechos" class="welcome-image">
+        </div>
+
+        <button id="btn-start" class="btn-primary">¡Empezar a Jugar! 🎮</button>
+      </div>
+    </section>
+
+    <!-- PANTALLA DE JUEGO -->
+    <section id="screen-game" class="screen">
+      <!-- Encabezado de Juego (Parejas y Movimientos) -->
+      <header class="game-header">
+        <div class="stats-panel">
+          <div class="stat-item correct">
+            <span class="stat-icon">⭐</span>
+            <span class="stat-label">Parejas:</span>
+            <span id="matches-found" class="stat-value">0 / 8</span>
+          </div>
+          <div class="stat-item moves">
+            <span class="stat-icon">🔄</span>
+            <span class="stat-label">Intentos:</span>
+            <span id="moves-count" class="stat-value">0</span>
+          </div>
+        </div>
+      </header>
+
+      <!-- Panel del Derecho Descubierto (Interactivo) -->
+      <div class="right-info-banner" id="right-info-banner" style="display: none;">
+        <div class="banner-content">
+          <span class="banner-emoji" id="banner-emoji">🩺</span>
+          <div class="banner-text-group">
+            <h3 class="banner-title" id="banner-title">Derecho a la Salud</h3>
+            <p class="banner-description" id="banner-description">Tienes derecho a que te cuiden cuando estés enfermo y a ir al doctor.</p>
+          </div>
+          <button id="btn-repeat-voice" class="btn-voice-repeat" title="Escuchar explicación de nuevo">🔊 Escuchar</button>
+        </div>
+      </div>
+
+      <!-- Tablero de Cartas (Grid 4x4) -->
+      <div class="grid-container">
+        <div class="cards-grid" id="cards-grid">
+          <!-- Las cartas se generarán dinámicamente con JavaScript -->
+        </div>
+      </div>
+
+      <!-- Consejos / Ayuda -->
+      <div class="help-tips">
+        <p>💡 Haz clic en una carta para voltearla y busca su pareja idéntica. ¡Aprende jugando!</p>
+      </div>
+    </section>
+
+    <!-- PANTALLA DE VICTORIA -->
+    <section id="screen-victory" class="screen">
+      <div class="victory-card">
+        <div class="trophy-container">🏆</div>
+        <h2 class="victory-title">¡Felicitaciones! 🎉</h2>
+        <p class="victory-subtitle">¡Encontraste todas las parejas de tus derechos!</p>
+
+        <!-- Resultados finales -->
+        <div class="results-board">
+          <div class="result-box correct">
+            <span class="result-icon">⭐</span>
+            <div class="result-number">8</div>
+            <div class="result-label">Derechos Aprendidos</div>
+          </div>
+          <div class="result-box moves">
+            <span class="result-icon">🔄</span>
+            <div class="result-number" id="final-moves">0</div>
+            <div class="result-label">Intentos totales</div>
+          </div>
+        </div>
+
+        <p class="victory-evaluation" id="victory-evaluation-text">¡Eres un campeón de los derechos de los niños!</p>
+
+        <button id="btn-restart" class="btn-primary">¡Jugar otra vez! 🔄</button>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Efecto de Fuegos Artificiales en CSS para la victoria -->
+  <div class="pyro" id="pyro-effect" style="display: none;">
+    <div class="before"></div>
+    <div class="after"></div>
+  </div>
+
+  <!-- JS -->
+  <script src="app.js"></script>
+</body>
+</html>
